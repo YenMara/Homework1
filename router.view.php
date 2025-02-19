@@ -7,7 +7,7 @@
         '/upload/users' => './controllers/pages/UploadPage.php',
 
         // handlers
-        '/store/users' => './controllers/handlers/SotreUserController.php',
+        '/store/users' => './controllers/handlers/StoreUserController.php',
         '/check/email' => './controllers/handlers/CheckEmailController.php',
 
         // error handling

@@ -1,64 +1,14 @@
-// $(document).ready(function () {
-//     $('#user-upload').on('submit', function (event) {
-//         event.preventDefault();
-//         let isValid = true;
-
-//         // Reset previous errors
-//         $('.error').text('').hide();
-//         $('.form-control').removeClass('border-danger');
-
-
-//         const username = $('#username').val();
-//         if (!username) {
-//             $('#username-error').text('Username is required').show();
-//             $('#username').addClass('border-danger');
-//             isValid = false;
-//         }
-
-//         if (!isValid) {
-//             return;
-//         }
-
-//         // Check email uniqueness (asynchronous)
-//         let formData = new FormData();
-//         formData.append('email', email);
-
-//         if (!email) {
-//             $('#email-error').text('email is required').show();
-//             $('#email').addClass('border-danger');
-//             isValid = false;
-//         }
-//         axios.post('/check/email', formData)
-//             .then(function (response) {
-//                 if (response.data.data) {
-//                     $('#email-error').text('Email is already taken').show();
-//                     $('#email').addClass('border-danger');
-//                     return;
-//                 }
-//                 // Submit the form only after email check
-//                 $('#user-upload')[0].submit();
-//             })
-//             .catch(function (error) {
-//                 alert('Error checking email. Please try again.');
-//             });
-//     });
-//     // if (!isValid) {
-//     //     return;
-//     // }
-// });
-
-
 $(document).ready(function () {
     $('#user-upload').on('submit', function (event) {
         event.preventDefault();
         let isValid = true;
 
-        // Reset previous errors
         $('.error').text('').hide();
         $('.form-control').removeClass('border-danger');
 
         const username = $('#username').val().trim();
         const email = $('#email').val().trim();
+        const avatar = $('#avatar')[0].files.length; 
 
         if (!username) {
             $('#username-error').text('Username is required').show();
@@ -76,14 +26,20 @@ $(document).ready(function () {
             isValid = false;
         }
 
+        if (avatar === 0) {
+            $('#avatar-error').text('Please upload an avatar image').show();
+            $('#avatar').addClass('border-danger');
+            isValid = false;
+        }
+
         if (!isValid) {
             return;
         }
 
-        // Check both username and email uniqueness
         let formData = new FormData();
         formData.append('username', username);
         formData.append('email', email);
+        formData.append('avatar', $('#avatar')[0].files[0]);
 
         axios.post('/check/user', formData)
             .then(function (response) {
@@ -97,7 +53,7 @@ $(document).ready(function () {
                     $('#email').addClass('border-danger');
                     return;
                 }
-                // Submit the form only if both are valid
+
                 $('#user-upload')[0].submit();
             })
             .catch(function (error) {
