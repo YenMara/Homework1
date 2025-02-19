@@ -1,9 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function () { 
     $('#user-upload').on('submit', function (event) {
         event.preventDefault();
         let isValid = true;
 
-        // Reset previous errors
         $('.error').text('').hide();
         $('.form-control').removeClass('border-danger');
 
@@ -30,7 +29,6 @@ $(document).ready(function () {
             return;
         }
 
-        // Check both username and email uniqueness
         let formData = new FormData();
         formData.append('username', username);
         formData.append('email', email);
@@ -47,7 +45,6 @@ $(document).ready(function () {
                     $('#email').addClass('border-danger');
                     return;
                 }
-                // Submit the form only if both are valid
                 $('#user-upload')[0].submit();
             })
             .catch(function (error) {

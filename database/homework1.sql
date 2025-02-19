@@ -11,7 +11,3 @@ CREATE TABLE images (
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
-INSERT INTO users (username, email) VALUES
-('mara', 'mara@gmail.com'),
-('nisa', 'nisa@gmail.com');
