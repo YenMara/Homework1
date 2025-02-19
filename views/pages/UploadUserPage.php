@@ -9,12 +9,18 @@
         .error { display: none; }
         .border-danger { border-color: red; }
         .img-thumbnail { max-width: 400px; height: auto; margin-top: 10px; display: none; }
+        .bg-form{
+            background-color:rgb(197, 237, 247);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
-    <div class="container row justify-content-center">
-        <div class="col-6">
-            <h2>User Upload Form</h2>
+    <div class="container m-auto mt-5 row justify-content-center">
+        <div class="col-6 bg-form">
+            <h2 class="text-center">User Upload</h2>
             <form id="user-upload" action="/store/users" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>

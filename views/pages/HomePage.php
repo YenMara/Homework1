@@ -14,12 +14,6 @@
         .card:hover {
             transform: scale(1.05);
         }
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
         img{
             width: 100%;
             height: 100%;
@@ -30,14 +24,14 @@
 <body>
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>User Table</h2>
-            <a href="/upload/users" class="btn btn-primary">Upload User</a>
+            <h2 class="text-"> User Information</h2>
+            <a href="/upload/users" class="btn btn-success">Upload User</a>
         </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             <?php foreach($users as $user): ?>
                 <div class="col">
-                    <div class="card">
-                        <div class="card-img">
+                    <div class="card" style="width:270px; height: 370px;">
+                        <div class="card-img m-auto mt-2" style="width: 90%; height: 60%;">
                                 <img src="/storage/avatars/<?= $user['avatar'] ?>" class="card-img-top" alt="Avatar">
                         </div>
                         <div class="card-body text-center">

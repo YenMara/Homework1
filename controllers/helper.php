@@ -4,9 +4,7 @@ function validationIsset($req)
     $errors = [];
     foreach ($req as $key => $val) {
         if ($key == 'email') {
-            if (!filter_var($req['email'], FILTER_VALIDATE_EMAIL)) {
-                $errors[$key] = "Invalid email format";
-            }
+            if (!filter_var($req['email'], FILTER_VALIDATE_EMAIL)) {$errors[$key] = "Invalid email format";}
         } else if (!isset($req[$key]) || empty($req[$key])) {
             $errors[$key] = $key . " is required";
         }
@@ -16,15 +14,12 @@ function validationIsset($req)
 function deleteAvatar($user, $user_id)
 {
     $ImageQuery = "SELECT id, avatar FROM users where id = :id";
-    $imagePara = [
-        'id' => $user_id
-    ];
+    $imagePara = ['id' => $user_id];
     $image = $user->show($ImageQuery, $imagePara);
     $filename = basename($image['data']['avatar']);
     $uploadDir = './storage/avatars/';
     $path = $uploadDir . $filename;
-    // unlink() to remove file
-    // file_exists() to check file if it exists
+    
     if (file_exists($path)) {
         unlink($path);
     }

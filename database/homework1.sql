@@ -1,13 +1,13 @@
-CREATE TABLE users (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(120),
-    email VARCHAR(255) NOT NULL UNIQUE,
-    avatar VARCHAR(255)
+create table users (
+    id int not null auto_increment primary key,
+    username varchar(120),
+    email varchar(255) not null unique,
+    avatar varchar(255)
 );
 
-CREATE TABLE images (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    path VARCHAR(255) NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+create table images (
+    id int auto_increment primary key,
+    path varchar(255) not null,
+    user_id int not null,
+    foreign key (user_id) references users(id) on delete cascade
 );

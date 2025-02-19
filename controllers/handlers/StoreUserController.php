@@ -6,13 +6,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formData = $_POST;
     $file = $_FILES['avatar'];
 
-    // Validate required fields
     $errors = [];
     if (empty($formData['username']) || empty($formData['email'])) {
         $errors[] = "Username and email are required.";
     }
 
-    // Handle file upload
     $uploadDir = './storage/avatars/';
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0755, true);
@@ -28,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Proceed if no errors
     if (empty($errors)) {
         $user = new User($conn);
         $query = "INSERT INTO users (username, email, avatar) VALUES (:username, :email, :avatar)";
@@ -39,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
 
         $result = $user->executeQuery($query, $params);
-
         if ($result['status']) {
             $userId = $conn->lastInsertId();
             if ($avatarPath) {
@@ -53,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Error adding user: " . $result['message'];
         }
     } else {
-        // Redirect back with errors
         header('Location: /');
         exit;
     }

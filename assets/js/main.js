@@ -1,4 +1,4 @@
-$(document).ready(function () { 
+$(document).ready(function () {
     $('#user-upload').on('submit', function (event) {
         event.preventDefault();
         let isValid = true;
@@ -8,6 +8,7 @@ $(document).ready(function () {
 
         const username = $('#username').val().trim();
         const email = $('#email').val().trim();
+        const avatar = $('#avatar')[0].files.length; 
 
         if (!username) {
             $('#username-error').text('Username is required').show();
@@ -25,6 +26,12 @@ $(document).ready(function () {
             isValid = false;
         }
 
+        if (avatar === 0) {
+            $('#avatar-error').text('Please upload an avatar image').show();
+            $('#avatar').addClass('border-danger');
+            isValid = false;
+        }
+
         if (!isValid) {
             return;
         }
@@ -32,6 +39,7 @@ $(document).ready(function () {
         let formData = new FormData();
         formData.append('username', username);
         formData.append('email', email);
+        formData.append('avatar', $('#avatar')[0].files[0]);
 
         axios.post('/check/user', formData)
             .then(function (response) {
@@ -45,6 +53,7 @@ $(document).ready(function () {
                     $('#email').addClass('border-danger');
                     return;
                 }
+
                 $('#user-upload')[0].submit();
             })
             .catch(function (error) {
